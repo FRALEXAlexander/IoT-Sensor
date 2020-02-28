@@ -29,16 +29,17 @@
 #include <Wire.h>
 #include <Adafruit_Sensor.h>
 #include <Adafruit_BME280.h>
+#include <Adafruit_SI1145.h>
 
 Adafruit_BME280 bme;
-
+Adafruit_SI1145 uv = Adafruit_SI1145();
 // Update these with values suitable for your network.
 
-const char *ssid = "htl-IoT";
-const char *password = "iot..2015";
-const char *mqtt_server = "iotmqtt.htl-klu.at";
-const char *mqttUserName = "htl-IoT";
-const char *mqttPassword = "iot..2015";
+const char *ssid = "FRALEX2.4Ghz";
+const char *password = "Martin1927";
+const char *mqtt_server = "10.0.0.10";
+const char *mqttUserName = "fralex";
+const char *mqttPassword = "Franzpichler1";
 
 const char *mqttClientID = "DEMO";
 
@@ -49,6 +50,7 @@ PubSubClient client(espClient);
 long lastMsg = 0;
 char msg[50];
 int value = 0;
+bool motionChange = false;
 
 void setup_wifi()
 {
@@ -74,7 +76,6 @@ void setup_wifi()
   Serial.println("IP address: ");
   Serial.println(WiFi.localIP());
 }
-
 void callback(char *topic, byte *payload, unsigned int length)
 {
   Serial.print("Message arrived [");
@@ -98,7 +99,6 @@ void callback(char *topic, byte *payload, unsigned int length)
     digitalWrite(2, HIGH); // Turn the LED off by making the voltage HIGH
   }
 }
-
 void reconnect()
 {
   // Loop until we're reconnected
@@ -113,16 +113,6 @@ void reconnect()
       Serial.println("connected");
       // Once connected, publish an announcement...
 
-     // String topic = rootTopic;
-      //topic.concat("outTopic");
-      //unsigned int len = topic.length();
-      //len++;
-      //char topicC[len];
-      //topic.toCharArray(topicC, len);
-      //Serial.println(topicC);
-      //client.publish(topicC, "hello world");
-      // ... and resubscribe
-      client.subscribe("inTopic");
     }
     else
     {
@@ -134,7 +124,6 @@ void reconnect()
     }
   }
 }
-
 void BME280LOOP()
 {
   String Ttopic = rootTopic;
@@ -143,7 +132,7 @@ void BME280LOOP()
   Tlen++;
   char TtopicC[Tlen];
   Ttopic.toCharArray(TtopicC, Tlen);
-  Serial.println(TtopicC);
+  //Serial.println(TtopicC);
   char Tbuf[100];
   sprintf(Tbuf, "%f", bme.readTemperature());
   //Serial.println(buf);
@@ -156,7 +145,7 @@ void BME280LOOP()
   Plen++;
   char PtopicC[Plen];
   Ptopic.toCharArray(PtopicC, Plen);
-  Serial.println(PtopicC);
+  //Serial.println(PtopicC);
   char Pbuf[100];
   sprintf(Pbuf, "%f", bme.readPressure());
   //Serial.println(buf);
@@ -169,22 +158,77 @@ void BME280LOOP()
   Hlen++;
   char HtopicC[Hlen];
   Htopic.toCharArray(HtopicC, Hlen);
-  Serial.println(HtopicC);
+  //Serial.println(HtopicC);
   char Hbuf[100];
   sprintf(Hbuf, "%f", bme.readHumidity());
   //Serial.println(buf);
   //Serial.println(bme.readTemperature());
   client.publish(HtopicC, Hbuf);
 }
+void GY1145LOOP()
+{
+
+  float UVindex = uv.readUV();
+  // the index is multiplied by 100 so to get the
+  // integer index, divide by 100!
+  UVindex /= 100.0;
+
+  String Ttopic = rootTopic;
+  Ttopic.concat("GY1145/UV");
+  unsigned int Tlen = Ttopic.length();
+  Tlen++;
+  char TtopicC[Tlen];
+  Ttopic.toCharArray(TtopicC, Tlen);
+  //Serial.println(TtopicC);
+  char Tbuf[100];
+  sprintf(Tbuf, "%f", UVindex);
+  //Serial.println(buf);
+  //Serial.println(bme.readTemperature());
+  client.publish(TtopicC, Tbuf);
+
+  String Ptopic = rootTopic;
+  Ptopic.concat("GY1145/VIS");
+  unsigned int Plen = Ptopic.length();
+  Plen++;
+  char PtopicC[Plen];
+  Ptopic.toCharArray(PtopicC, Plen);
+  //Serial.println(PtopicC);
+  char Pbuf[100];
+  sprintf(Pbuf, "%d", uv.readVisible());
+  //Serial.println(buf);
+  //Serial.println(bme.readTemperature());
+  client.publish(PtopicC, Pbuf);
+
+  String Htopic = rootTopic;
+  Htopic.concat("GY1145/IR");
+  unsigned int Hlen = Htopic.length();
+  Hlen++;
+  char HtopicC[Hlen];
+  Htopic.toCharArray(HtopicC, Hlen);
+  //Serial.println(HtopicC);
+  char Hbuf[100];
+  sprintf(Hbuf, "%d", uv.readIR());
+  //Serial.println(buf);
+  //Serial.println(bme.readTemperature());
+  client.publish(HtopicC, Hbuf);
+}
+void IRAM_ATTR MOTIONSENSOR()
+{
+  motionChange = true;
+}
 
 void setup()
 {
+
+  pinMode(32, INPUT);
   pinMode(2, OUTPUT); // Initialize the BUILTIN_LED pin as an output
   Serial.begin(115200);
   bme.begin(0x76);
+  uv.begin();
   setup_wifi();
   client.setServer(mqtt_server, 1883);
   client.setCallback(callback);
+  attachInterrupt(32, MOTIONSENSOR, CHANGE);
 }
 
 void loop()
@@ -201,5 +245,26 @@ void loop()
     lastMsg = now;
 
     BME280LOOP();
+    GY1145LOOP();
+  }
+
+  if (motionChange)
+  {
+
+    Serial.println(millis());
+    String Htopic = rootTopic;
+    Htopic.concat("MOTIONSENSOR");
+    unsigned int Hlen = Htopic.length();
+    Hlen++;
+    char HtopicC[Hlen];
+    Htopic.toCharArray(HtopicC, Hlen);
+    Serial.println(HtopicC);
+    char Hbuf[100];
+    bool status = digitalRead(32);
+    sprintf(Hbuf, "%d", status);
+    Serial.println(Hbuf);
+     Serial.println(bme.readTemperature());
+    client.publish(HtopicC, Hbuf);
+    motionChange = false;
   }
 }
