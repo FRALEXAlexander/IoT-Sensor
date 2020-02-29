@@ -1,0 +1,2 @@
+void GY1145SETUP();
+void GY1145LOOP();

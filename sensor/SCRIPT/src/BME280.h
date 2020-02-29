@@ -1,0 +1,2 @@
+void BME280SETUP();
+void BME280LOOP();
