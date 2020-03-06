@@ -1,7 +1,7 @@
 #include "OTA.h"
 #include "CONFIG.h"
 
-WebServer server(80);
+
 
 /* Style */
 String style =
@@ -98,5 +98,5 @@ void OTASETUP()
 
 void OTALOOP()
 {
-    server.handleClient();
+   
 }

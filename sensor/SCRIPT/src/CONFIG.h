@@ -1,4 +1,5 @@
 #include "Arduino.h"
+#include <WebServer.h>
 extern String rootTopic;
 extern String bme280TemperatureTopic;
 extern String bme280PressureTopic;
@@ -17,3 +18,4 @@ extern char *mqttUserName;
 extern char *mqttPassword;
 extern char *mqttClientID;
 extern int motionsensorPin;
+extern WebServer server;

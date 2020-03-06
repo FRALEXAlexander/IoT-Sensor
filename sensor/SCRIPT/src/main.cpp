@@ -1,11 +1,12 @@
 #include <Arduino.h>
+#include "CONFIG.h"
 #include "MyWIFI.h"
 #include "BME280.h"
 #include "GY1145.h"
 #include "MQTT.h"
-#include "CONFIG.h"
 #include "MOTIONSENSOR.h"
 #include "OTA.h"
+#include "REST.h"
 
 long lastMsg = 0;
 char msg[50];
@@ -21,6 +22,7 @@ void setup()
 
   WIFISETUP();
   OTASETUP();
+  ADDROUTES();
   MQTTSETUP();
 }
 
@@ -37,5 +39,5 @@ void loop()
 
   MOTIONSENSORLOOP();
   MQTTLOOP();
-  OTALOOP();
+   server.handleClient();
 }

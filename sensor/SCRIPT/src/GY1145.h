@@ -1,2 +1,3 @@
 void GY1145SETUP();
+float* GY1145MEASURE();
 void GY1145LOOP();

@@ -1,2 +1,3 @@
 void BME280SETUP();
+float* BME280MEASURE();
 void BME280LOOP();

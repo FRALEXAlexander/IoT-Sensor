@@ -12,6 +12,16 @@ void BME280SETUP()
     bme.begin(0x76);
 }
 
+float* BME280MEASURE(){
+    float* out = new float[4];
+    out[0] = bme.readTemperature();
+    out[1] = bme.readPressure();
+    out[2] = bme.readHumidity();
+    out[3] = bme.readAltitude(1030.25);
+    return  out;
+}
+
+
 void BME280LOOP()
 {
 

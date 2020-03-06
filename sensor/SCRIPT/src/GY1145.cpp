@@ -12,6 +12,15 @@ void GY1145SETUP()
     uv.begin();
 }
 
+float* GY1145MEASURE(){
+    float* out = new float[4];
+    out[0] = uv.readIR();
+    out[1] = uv.readUV();
+    out[2] = uv.readVisible();
+    out[3] = uv.readProx();
+    return  out;
+}
+
 void GY1145LOOP()
 {
 
