@@ -1,19 +1,21 @@
 <template>
   <div id="app">
    <BME280Sensor/>
-   
+   <GY1145Sensor/>
   </div>
 </template>
 
 <script>
 
 import BME280Sensor from './components/BME280Sensor.vue'
+import GY1145Sensor from './components/GY1145Sensor.vue'
 
 
 export default {
   name: 'App',
   components: {
-    BME280Sensor
+    BME280Sensor,
+    GY1145Sensor
   }
 }
 </script>
@@ -25,6 +27,6 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+ margin: auto;
 }
 </style>

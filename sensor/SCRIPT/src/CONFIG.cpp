@@ -1,5 +1,5 @@
 #include "CONFIG.h"
-
+#include "ESPAsyncWebServer.h"
 String rootTopic = "FRALEX/IoTSensor/";
 String bme280TemperatureTopic = "BME280/temperature";
 String bme280PressureTopic = "BME280/pressure";
@@ -18,4 +18,5 @@ char *mqttUserName = "htl-IoT";
 char *mqttPassword = "iot..2015";
 char *mqttClientID = "DEMOfralex";
 int motionsensorPin = 32;
-WebServer server(80);
+WebServer server(2000);
+AsyncWebServer dserver(80);

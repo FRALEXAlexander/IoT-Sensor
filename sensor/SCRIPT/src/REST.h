@@ -1,1 +1,1 @@
-void ADDROUTES();
+void ADDRESTROUTES();

@@ -7,7 +7,7 @@
 #include "MOTIONSENSOR.h"
 #include "OTA.h"
 #include "REST.h"
-
+#include "DASHBOARD.h"
 long lastMsg = 0;
 char msg[50];
 int value = 0;
@@ -22,8 +22,10 @@ void setup()
 
   WIFISETUP();
   OTASETUP();
-  ADDROUTES();
+  ADDRESTROUTES();
+  ADDDASHBOARDROUTES();
   MQTTSETUP();
+  dserver.begin();
 }
 
 void loop()
@@ -40,4 +42,5 @@ void loop()
   MOTIONSENSORLOOP();
   MQTTLOOP();
    server.handleClient();
+   
 }
