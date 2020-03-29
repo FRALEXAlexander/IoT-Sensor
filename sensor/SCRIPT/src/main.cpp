@@ -8,9 +8,7 @@
 #include "OTA.h"
 #include "REST.h"
 #include "DASHBOARD.h"
-long lastMsg = 0;
-char msg[50];
-int value = 0;
+unsigned long lastMsg = 0;
 
 void setup()
 {
@@ -41,6 +39,5 @@ void loop()
 
   MOTIONSENSORLOOP();
   MQTTLOOP();
-   server.handleClient();
-   
+  server.handleClient();
 }

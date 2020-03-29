@@ -20,8 +20,6 @@ void MOTIONSENSORLOOP()
 {
     if (motionChange)
     {
-
-        
         String Htopic = rootTopic;
         Htopic.concat(motionsensorTopic);
         unsigned int Hlen = Htopic.length();

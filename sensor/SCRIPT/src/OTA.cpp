@@ -1,8 +1,6 @@
 #include "OTA.h"
 #include "CONFIG.h"
 
-
-
 /* Style */
 String style =
     "<style>#file-input,input{width:100%;height:44px;border-radius:4px;margin:10px auto;font-size:15px}"
@@ -60,7 +58,6 @@ String serverIndex =
 
 void OTASETUP()
 {
-
     /*return index page which is stored in serverIndex */
     server.on("/ota", HTTP_GET, []() {
         if (!server.authenticate(OTAUser, OTAPassword))

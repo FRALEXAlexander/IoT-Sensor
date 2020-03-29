@@ -21,7 +21,6 @@ float* BME280MEASURE(){
     return  out;
 }
 
-
 void BME280LOOP()
 {
 

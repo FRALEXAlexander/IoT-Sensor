@@ -516,27 +516,25 @@
 </classes>
 <parts>
 <part name="U$1" library="ESP32-DEVKITV1" deviceset="ESP32DEVKITV1" device=""/>
-<part name="JP1" library="pinhead" library_urn="urn:adsk.eagle:library:325" deviceset="PINHD-1X3" device="" package3d_urn="urn:adsk.eagle:package:22458/2"/>
-<part name="JP2" library="pinhead" library_urn="urn:adsk.eagle:library:325" deviceset="PINHD-1X4" device="" package3d_urn="urn:adsk.eagle:package:22407/2"/>
-<part name="JP3" library="pinhead" library_urn="urn:adsk.eagle:library:325" deviceset="PINHD-1X4" device="" package3d_urn="urn:adsk.eagle:package:22407/2"/>
+<part name="MOTIONSENSOR" library="pinhead" library_urn="urn:adsk.eagle:library:325" deviceset="PINHD-1X3" device="" package3d_urn="urn:adsk.eagle:package:22458/2"/>
+<part name="GY1145" library="pinhead" library_urn="urn:adsk.eagle:library:325" deviceset="PINHD-1X4" device="" package3d_urn="urn:adsk.eagle:package:22407/2"/>
+<part name="BME280" library="pinhead" library_urn="urn:adsk.eagle:library:325" deviceset="PINHD-1X4" device="" package3d_urn="urn:adsk.eagle:package:22407/2"/>
 </parts>
 <sheets>
 <sheet>
 <plain>
 </plain>
 <instances>
-<instance part="U$1" gate="G$1" x="63.5" y="50.8" smashed="yes" rot="R90">
-<attribute name="NAME" x="58.42" y="24.13" size="1.27" layer="95" rot="R180"/>
-</instance>
-<instance part="JP1" gate="A" x="33.02" y="33.02" smashed="yes" rot="R180">
+<instance part="U$1" gate="G$1" x="63.5" y="50.8" smashed="yes" rot="R90"/>
+<instance part="MOTIONSENSOR" gate="A" x="33.02" y="33.02" smashed="yes" rot="R180">
 <attribute name="NAME" x="39.37" y="27.305" size="1.778" layer="95" rot="R180"/>
 <attribute name="VALUE" x="39.37" y="40.64" size="1.778" layer="96" rot="R180"/>
 </instance>
-<instance part="JP2" gate="A" x="114.3" y="66.04" smashed="yes">
+<instance part="GY1145" gate="A" x="114.3" y="66.04" smashed="yes">
 <attribute name="NAME" x="107.95" y="74.295" size="1.778" layer="95"/>
 <attribute name="VALUE" x="107.95" y="58.42" size="1.778" layer="96"/>
 </instance>
-<instance part="JP3" gate="A" x="114.3" y="40.64" smashed="yes">
+<instance part="BME280" gate="A" x="114.3" y="40.64" smashed="yes">
 <attribute name="NAME" x="107.95" y="48.895" size="1.778" layer="95"/>
 <attribute name="VALUE" x="107.95" y="33.02" size="1.778" layer="96"/>
 </instance>
@@ -546,16 +544,16 @@
 <nets>
 <net name="5V" class="0">
 <segment>
-<pinref part="JP1" gate="A" pin="1"/>
+<pinref part="MOTIONSENSOR" gate="A" pin="1"/>
 <pinref part="U$1" gate="G$1" pin="VIN"/>
 <wire x1="35.56" y1="30.48" x2="35.56" y2="27.94" width="0.1524" layer="91"/>
 <wire x1="35.56" y1="27.94" x2="45.72" y2="27.94" width="0.1524" layer="91"/>
-<label x="43.18" y="22.86" size="1.778" layer="95"/>
+<label x="45.72" y="25.4" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="MD" class="0">
 <segment>
-<pinref part="JP1" gate="A" pin="2"/>
+<pinref part="MOTIONSENSOR" gate="A" pin="2"/>
 <wire x1="35.56" y1="33.02" x2="40.64" y2="33.02" width="0.1524" layer="91"/>
 <wire x1="40.64" y1="33.02" x2="40.64" y2="50.8" width="0.1524" layer="91"/>
 <pinref part="U$1" gate="G$1" pin="IO32"/>
@@ -568,46 +566,47 @@
 <pinref part="U$1" gate="G$1" pin="GND@2"/>
 <wire x1="81.28" y1="30.48" x2="101.6" y2="30.48" width="0.1524" layer="91"/>
 <wire x1="101.6" y1="30.48" x2="101.6" y2="40.64" width="0.1524" layer="91"/>
-<pinref part="JP3" gate="A" pin="3"/>
+<pinref part="BME280" gate="A" pin="3"/>
 <wire x1="101.6" y1="40.64" x2="111.76" y2="40.64" width="0.1524" layer="91"/>
-<pinref part="JP2" gate="A" pin="3"/>
+<pinref part="GY1145" gate="A" pin="3"/>
 <wire x1="111.76" y1="66.04" x2="101.6" y2="66.04" width="0.1524" layer="91"/>
 <wire x1="101.6" y1="66.04" x2="101.6" y2="40.64" width="0.1524" layer="91"/>
 <junction x="101.6" y="40.64"/>
-<pinref part="JP1" gate="A" pin="3"/>
-<wire x1="35.56" y1="35.56" x2="25.4" y2="35.56" width="0.1524" layer="91"/>
-<wire x1="25.4" y1="35.56" x2="25.4" y2="20.32" width="0.1524" layer="91"/>
+<wire x1="25.4" y1="40.64" x2="25.4" y2="20.32" width="0.1524" layer="91"/>
 <wire x1="25.4" y1="20.32" x2="101.6" y2="20.32" width="0.1524" layer="91"/>
 <wire x1="101.6" y1="20.32" x2="101.6" y2="30.48" width="0.1524" layer="91"/>
 <junction x="101.6" y="30.48"/>
+<wire x1="25.4" y1="40.64" x2="35.56" y2="40.64" width="0.1524" layer="91"/>
+<pinref part="MOTIONSENSOR" gate="A" pin="3"/>
+<wire x1="35.56" y1="40.64" x2="35.56" y2="35.56" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="3V3" class="0">
 <segment>
 <pinref part="U$1" gate="G$1" pin="3V3"/>
 <wire x1="81.28" y1="27.94" x2="104.14" y2="27.94" width="0.1524" layer="91"/>
-<pinref part="JP3" gate="A" pin="4"/>
+<pinref part="BME280" gate="A" pin="4"/>
 <wire x1="104.14" y1="27.94" x2="104.14" y2="38.1" width="0.1524" layer="91"/>
 <wire x1="104.14" y1="38.1" x2="111.76" y2="38.1" width="0.1524" layer="91"/>
-<pinref part="JP2" gate="A" pin="4"/>
+<pinref part="GY1145" gate="A" pin="4"/>
 <wire x1="111.76" y1="63.5" x2="104.14" y2="63.5" width="0.1524" layer="91"/>
 <wire x1="104.14" y1="63.5" x2="104.14" y2="38.1" width="0.1524" layer="91"/>
 <junction x="104.14" y="38.1"/>
-<label x="83.82" y="25.4" size="1.778" layer="95"/>
+<label x="81.28" y="25.4" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="SDA" class="0">
 <segment>
-<pinref part="JP2" gate="A" pin="1"/>
+<pinref part="GY1145" gate="A" pin="1"/>
 <wire x1="111.76" y1="71.12" x2="96.52" y2="71.12" width="0.1524" layer="91"/>
 <wire x1="96.52" y1="71.12" x2="96.52" y2="53.34" width="0.1524" layer="91"/>
 <pinref part="U$1" gate="G$1" pin="IO21"/>
 <wire x1="96.52" y1="53.34" x2="81.28" y2="53.34" width="0.1524" layer="91"/>
-<pinref part="JP3" gate="A" pin="1"/>
+<pinref part="BME280" gate="A" pin="1"/>
 <wire x1="96.52" y1="53.34" x2="96.52" y2="45.72" width="0.1524" layer="91"/>
 <wire x1="96.52" y1="45.72" x2="111.76" y2="45.72" width="0.1524" layer="91"/>
 <junction x="96.52" y="53.34"/>
-<label x="88.9" y="50.8" size="1.778" layer="95"/>
+<label x="86.36" y="50.8" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="SCL" class="0">
@@ -615,13 +614,13 @@
 <pinref part="U$1" gate="G$1" pin="IO22"/>
 <wire x1="81.28" y1="60.96" x2="99.06" y2="60.96" width="0.1524" layer="91"/>
 <wire x1="99.06" y1="60.96" x2="99.06" y2="68.58" width="0.1524" layer="91"/>
-<pinref part="JP2" gate="A" pin="2"/>
+<pinref part="GY1145" gate="A" pin="2"/>
 <wire x1="99.06" y1="68.58" x2="111.76" y2="68.58" width="0.1524" layer="91"/>
-<pinref part="JP3" gate="A" pin="2"/>
+<pinref part="BME280" gate="A" pin="2"/>
 <wire x1="111.76" y1="43.18" x2="99.06" y2="43.18" width="0.1524" layer="91"/>
 <wire x1="99.06" y1="43.18" x2="99.06" y2="60.96" width="0.1524" layer="91"/>
 <junction x="99.06" y="60.96"/>
-<label x="86.36" y="63.5" size="1.778" layer="95"/>
+<label x="86.36" y="58.42" size="1.778" layer="95"/>
 </segment>
 </net>
 </nets>

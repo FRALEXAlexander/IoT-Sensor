@@ -2,7 +2,6 @@
 #include "MQTT.h"
 #include "CONFIG.h"
 
-
 WiFiClient espClient;
 PubSubClient client(espClient);
 

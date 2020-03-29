@@ -8,12 +8,6 @@
 #include <NeoPixelBus.h>
 #include <WiFi.h>
 
-
-
-
-
-
-
 String rootTopic = "FRALEX/IoTSensor/";
 char* bme280TemperatureTopic = "FRALEX/IoTSensor/BME280/temperature";
 char* bme280PressureTopic = "FRALEX/IoTSensor/BME280/pressure";
@@ -32,11 +26,6 @@ char *mqttUserName = "htl-IoT";
 char *mqttPassword = "iot..2015";
 char *mqttClientID = "DEMOfralex2";
 
-
-
-
-
-
 void read_taster(void);
 int item;
 const uint16_t PixelCount = 5; //enter number of pixel
@@ -49,12 +38,10 @@ long millis_old;
 
 int s2_press_count, s4_press_count; //Wieviel Lesezyklen hintereinander
 
-
 // three element pixels, in different order and speeds
 NeoPixelBus<NeoGrbFeature, Neo800KbpsMethod> strip(PixelCount, PixelPin);
 // Declaration for an SSD1306 display connected to I2C (SDA, SCL pins)
 Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, -1);
-
 
 void WIFISETUP()
 {

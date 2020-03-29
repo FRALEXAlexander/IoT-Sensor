@@ -1,0 +1,14 @@
+Partlist
+
+Exported from SensorPCB.brd at 27.03.2020 14:26
+
+EAGLE Version 9.5.1 Copyright (c) 1988-2019 Autodesk, Inc.
+
+Assembly variant: 
+
+Part         Value          Package        Library        Position (mil)        Orientation
+
+BME280                      1X04           pinhead        (850 300)             R0
+GY1145                      1X04           pinhead        (350 300)             R180
+MOTIONSENSOR                1X03           pinhead        (350 600)             R0
+U$1          ESP32DEVKITV1  ESP32-DEVKITV1 ESP32-DEVKITV1 (640 1120)            R90

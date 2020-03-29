@@ -12,13 +12,14 @@ void GY1145SETUP()
     uv.begin();
 }
 
-float* GY1145MEASURE(){
-    float* out = new float[4];
+float *GY1145MEASURE()
+{
+    float *out = new float[4];
     out[0] = uv.readIR();
     out[1] = uv.readUV();
     out[2] = uv.readVisible();
     out[3] = uv.readProx();
-    return  out;
+    return out;
 }
 
 void GY1145LOOP()
@@ -31,10 +32,10 @@ void GY1145LOOP()
     Tlen++;
     char TtopicC[Tlen];
     Ttopic.toCharArray(TtopicC, Tlen);
-   
+
     char Tbuf[100];
     sprintf(Tbuf, "%f", UVindex);
-    
+
     client.publish(TtopicC, Tbuf);
 
     String Ptopic = rootTopic;
@@ -43,10 +44,10 @@ void GY1145LOOP()
     Plen++;
     char PtopicC[Plen];
     Ptopic.toCharArray(PtopicC, Plen);
-    
+
     char Pbuf[100];
     sprintf(Pbuf, "%d", uv.readVisible());
-    
+
     client.publish(PtopicC, Pbuf);
 
     String Htopic = rootTopic;
@@ -55,9 +56,9 @@ void GY1145LOOP()
     Hlen++;
     char HtopicC[Hlen];
     Htopic.toCharArray(HtopicC, Hlen);
-    
+
     char Hbuf[100];
     sprintf(Hbuf, "%d", uv.readIR());
-    
+
     client.publish(HtopicC, Hbuf);
 }

@@ -1,0 +1,19 @@
+Partlist
+
+Exported from UIPCB.brd at 27.03.2020 14:29
+
+EAGLE Version 9.5.1 Copyright (c) 1988-2019 Autodesk, Inc.
+
+Assembly variant: 
+
+Part     Value                   Package                 Library        Position (mil)        Orientation
+
+LED0     WS2812B                 WS2812B                 WS2812B        (275.59055 905.51181) R0
+LED1     WS2812B                 WS2812B                 WS2812B        (531.49606 1358.26772) R180
+LED2     WS2812B                 WS2812B                 WS2812B        (1062.99213 1358.26772) R180
+LED3     WS2812B                 WS2812B                 WS2812B        (1594.48819 1358.26772) R180
+LED4     WS2812B                 WS2812B                 WS2812B        (1850.3937 905.51181) R0
+S1                               B3F-10XX                switch-omron   (275.59055 393.70079) R90
+S2                               B3F-10XX                switch-omron   (1850.3937 393.70079) R90
+U$1      ESP32DEVKITV1           ESP32-DEVKITV1          ESP32-DEVKITV1 (1090 2120)           R0
+U$2      DISPLAY-OLED-128X64-I2C DISPLAY-OLED-128X64-I2C SSD1306        (1062.99213 590.55118) R0
